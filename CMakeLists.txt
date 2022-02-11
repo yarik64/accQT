@@ -1,0 +1,32 @@
+cmake_minimum_required(VERSION 3.5)
+
+project(AlteratorQT LANGUAGES CXX)
+
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+set(RQPK Core;Gui;Widgets;Qml;Quick)
+
+foreach(I IN LISTS RQPK)
+    find_package(QT NAMES Qt6 Qt5 COMPONENTS ${I} REQUIRED)
+    find_package(Qt${QT_VERSION_MAJOR} COMPONENTS ${I} REQUIRED)
+    message("package ${I} find")
+endforeach()
+
+add_executable(AlteratorQT
+	main.cpp
+	main.h
+)
+
+foreach(I IN LISTS RQPK)
+    target_link_libraries(AlteratorQT PRIVATE Qt${QT_VERSION_MAJOR}::${I})
+    message("package ${I} linked")
+endforeach()
+
+message(LISTS RQPK)
