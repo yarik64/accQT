@@ -13,20 +13,14 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(RQPK Core;Gui;Widgets;Qml;Quick)
 
-foreach(I IN LISTS RQPK)
-    find_package(QT NAMES Qt6 Qt5 COMPONENTS ${I} REQUIRED)
-    find_package(Qt${QT_VERSION_MAJOR} COMPONENTS ${I} REQUIRED)
-    message("package ${I} find")
-endforeach()
-
 add_executable(AlteratorQT
 	main.cpp
 	main.h
 )
 
 foreach(I IN LISTS RQPK)
+    find_package(QT NAMES Qt6 Qt5 COMPONENTS ${I} REQUIRED)
+    find_package(Qt${QT_VERSION_MAJOR} COMPONENTS ${I} REQUIRED)
     target_link_libraries(AlteratorQT PRIVATE Qt${QT_VERSION_MAJOR}::${I})
-    message("package ${I} linked")
 endforeach()
 
-message(LISTS RQPK)
