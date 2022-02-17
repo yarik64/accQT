@@ -2,9 +2,8 @@
 #include <QtGui>
 #include <QApplication>
 #include <QGridLayout>
-#include <QRect>
 #include <QDir>
-#include <QRegExp>
+#include <QLabel>
 
 #include <iostream>
 
@@ -15,83 +14,86 @@
 #define PATH_CATHEGORIES "/usr/share/alterator/desktop-directories/"
 #define PATH_MODULES "/usr/share/alterator/applications/"
 
-#define REX_NAME "(?:\s*Name\[ru\]=)(.*)"
-#define REX_ICON "(?:\s*Icon=)(.*)"
-#define REX_CATH "(?:\s*Categories=)(.*)"
+class AppButton: public QPushButton {
+	public:
+		/*
+		AppButton(QString *path_to_desktop) {
+			for (QFileInfoList fileName : res){
+			}
+		}
+		*/
+		void setName(QString a){appName = a;}
+		void setIcon(QString a){appIcon = a;}
+		void setCath(QString a){appCath = a;}
 
+		QString getName(){return appName;}
+		QString getIcon(){return appIcon;}
+		QString getCath(){return appCath;}
 
-
-class parseDestops {
-
-    public:
-virtual QHash parse(QString dt_addr) {
-		QFile inputFile(dt_addr);
-		inputFile.open(QIODevice::ReadOnly);
-
-		QTextStream in(&inputFile);
-		QRegExp rxName(REX_NAME);
-		QRegExp rxIcon(REX_ICON);
-		QRegExp rxCath(REX_CATH);
-
-        rxName.setMinimal(true);
-        rxIcon.setMinimal(true);
-        rxCath.setMinimal(true);
-
-        int pos = rxName.indexIn(in.readAll());
-        int pos = rxIcon.indexIn(in.readAll());
-        int pos = rxCath.indexIn(in.readAll());
-
-        QHash result;
-		result["Name"] = rxName.capturedTexts();
-		result["Icon"] = rxIcon.capturedTexts();
-		result["Cath"] = rxCath.capturedTexts();
-
-		inputFile.close();
-		return result;
-	}
-}
-
+	private:
+		QString appName;
+		QString appIcon;
+		QString appCath;
+};
 
 
 
 int main(int argc, char *argv[]) {
 
+	// объявляем элементы
 	QApplication app(argc, argv);
 	QMainWindow w;
+	QGridLayout* grid = new QGridLayout;
 
-virtual QFileInfoList flists(QString path) {
+	// получаем список приложений
 	QDir dir;
-	dir.setPath(path);
+	dir.setPath(PATH_CATHEGORIES);
 	dir.setFilter(QDir::Files);
-    QFileInfoList result = dir.entryInfoList();
-	return result;
-}
+	QFileInfoList app_desktop_files = dir.entryInfoList();
 
-	// получаем список названий desktop-файлов содержащих категории
-	QFileInfoList listCathegories = flists(PATH_CATHEGORIES);
+	QList<AppButton>* app_buttons;
+	QList<QString> cathedories;
 
-	// получаем список названий desktop-файлов содержащих имна модулей
-	QFileInfoList listApp = flists(PATH_MODULES);
+	// создаем массив кнопок QPushButton
+	// забиваем их в QList 
+	for (QFileInfo fileName : app_desktop_files) {
+		AppButton *button = new AppButton;
 
-	// парсим *.desktop для извлечения нужной инфы
-	parseDesktops();
+		QSettings settings(fileName.absoluteFilePath(), QSettings::IniFormat);
+				settings.beginGroup("Desktop Entry");
+				button->setName (settings.value("Name").toString());
+				button->setIcon (settings.value("Icon").toString());
+				button->setCath (settings.value("Categories").toString());
+		settings.endGroup();
 
-	// анализируем списки для составления Grid
+		cathedories << button->getCath();
+		app_buttons->insert(button->getName, *button);
 
-	for (int i = 0; i < listApp.size(); ++i) {
-		QFileInfo fApp = listApp.at(i);
+	}
 
-		QTextStream st(stdout) << fApp;
+	// заливаем в grid копки
+	int row=0;
+	for (QString cath : cathedories) {
+		int col=0;
+
+		QLabel *lcath = new QLabel;
+		lcath->setText(cath);
+		grid->addItem(*lcath, row++, col, 1, 1);
+
+		for (AppButton *btn : app_buttons){
+			if (btn->getCath==cath) {
+				grid->addItem(btn, row, col++);
+			}
+		}
 	}
 
 
-	QGridLayout* grid = new QGridLayout;
 	grid->setMargin(5);
 	grid->setSpacing(15);
-
-
 	w.resize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+	w.setLayout(grid);
 	w.show();
 	return app.exec();
 
 }
+
