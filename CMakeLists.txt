@@ -14,8 +14,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(RQPK Core;Gui;Widgets;Qml;Quick)
 
 add_executable(AlteratorQT
-	main.cpp
 	main.h
+	main.cpp
+
+	mainwindow.h
+	mainwindow.cpp
+
 )
 
 foreach(I IN LISTS RQPK)
