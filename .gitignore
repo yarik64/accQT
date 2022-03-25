@@ -1,3 +1,6 @@
 *~
+.*swp
 build
 run.sh
+err.log
+CMakeLists.txt.user

@@ -1,18 +1,17 @@
-// app.cpp
+// module.cpp
 
 #include <QString>
 #include <QSettings>
 
+#include "module.h"
 
-App::app(QString *p){
-app:load(*p);
-}
+Module::Module(){ }
 
-app::load(QString *path){
+void Module::load(QString path){
 	QSettings settings(path, QSettings::IniFormat);
 	settings.beginGroup("Desktop Entry");
 	this->Name = settings.value("Name").toString();
 	this->Icon = settings.value("Icon").toString();
-	this->Cath = settings.value("Categories").toString();
+	this->Cathegory = settings.value("Categories").toString();
 	settings.endGroup();
 }

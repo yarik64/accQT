@@ -1,19 +1,37 @@
-// AccQT.h
+// accQT.h
 
-#include <QDir>
+#ifndef ACCQT_ACCQT_H
+#define ACCQT_ACCQT_H
+
+#include <QApplication>
+
+
+// containers
+#include <QList>
 #include <QString>
 
 // headers
-#include "app.h"
+#include "mainwindow.h"
+#include "module.h"
+#include "cathegorie.h"
 
-class AccQT {
+
+class AccQT : public QApplication {
 
 	public:
-		AccQT();
+		AccQT(int &argc, char *argv[]);
 		~AccQT();
-		loadApps();
+		void loadUI();
+		void loadModules();
+		void loadCathegories();
+
+		QList<Module>     getModules();
+		QList<Cathegorie> getCathegories();
 
 	private:
-		QList<app> applications;
+		QList<Module>     modules;
+		QList<Cathegorie> cathegories;
 
 };
+#endif // ACCQT_ACCQT_H
+

@@ -1,19 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
 set(PRNAME AlteratorQT)
-set(EXEC
-	main.cpp
-
-	mainwindow.h
-	mainwindow.cpp
-
-	applications.h
-	applications.cpp
-
-	appfield.h
-	appfield.cpp
-	)
-
 
 project(${PRNAME} LANGUAGES CXX)
 
@@ -26,13 +13,14 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(RQPK Core;Gui;Widgets;Qml;Quick)
+set(REQUIRES
+	Core
+	Gui
+	Widgets
+	Qml
+	Quick
+	)
 
-add_executable(${PRNAME} ${EXEC})
+add_subdirectory(src)
 
-foreach(I IN LISTS RQPK)
-    find_package(QT NAMES Qt6 Qt5 COMPONENTS ${I} REQUIRED)
-    find_package(Qt${QT_VERSION_MAJOR} COMPONENTS ${I} REQUIRED)
-	target_link_libraries(${PRNAME} PRIVATE Qt${QT_VERSION_MAJOR}::${I})
-endforeach()
 

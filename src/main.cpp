@@ -1,14 +1,12 @@
+// main.cpp
+
 #include <iostream>
 
-#include "appfield.h"
-#include "applications.h"
-#include "mainwindow.h"
 
+#include "accQT.h"
 
 int main(int argc, char* argv[]){
-	QApplication app(argc, argv);
-	MainWindow w;
-
-	w.show();
+	AccQT app(argc, argv);
 	return app.exec();
 }
+

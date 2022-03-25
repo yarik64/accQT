@@ -1,17 +1,34 @@
 // mainwindow.cpp
 
 #include <QWidget>
+#include <QString>
+
+#include "mainwindow.h"
+#include "appfield.h"
 
 #define WIDTH 800
 #define HEIGHT 600
 
 
-MainWindow::MainWindow(){
-	AppField *field =  new AppField;
-	this->setLaout(field);
-	this->resize(WIDTH, HEIGHT);
+MainWindow::MainWindow() { }
+
+MainWindow::~MainWindow() {
+	delete this;
 }
 
-MainWindow::MainWindow() {
-	delete this;
+void MainWindow::setUI(AccQT *app) {
+	AppField *field =  new AppField;
+	field->setParent(this);
+
+	field->loadCathegories(
+			app->getCathegories()
+			);
+
+	field->loadModules(
+			app->getModules()
+			);
+
+	this->setCentralWidget(field);
+	this->resize(WIDTH, HEIGHT);
+
 }
