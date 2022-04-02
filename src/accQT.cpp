@@ -2,6 +2,7 @@
 
 // headers
 #include "accQT.h"
+#include "mainwindow.h"
 
 
 // conrainers
@@ -17,7 +18,7 @@
 #define PATH_CATH "/usr/share/alterator/desktop-directories/"
 
 
-AccQT::AccQT(int &argc, char *argv[]) {
+AccQT::AccQT(int argc, char *argv[]): QApplication(argc, argv) {
 	this->loadUI();
 }
 
@@ -29,7 +30,7 @@ AccQT::~AccQT() {
 
 void AccQT::loadUI() {
 	MainWindow w;
-	w.setUI(*this);
+    //w.setUI(*this);
 	w.show();
 }
 

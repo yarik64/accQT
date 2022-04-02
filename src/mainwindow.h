@@ -14,7 +14,7 @@ class MainWindow : public QMainWindow {
 	public:
 		MainWindow();
 		~MainWindow();
-		void setUI(AccQT *app);
+        void setUI(AccQT *app);
 
 	private:
 

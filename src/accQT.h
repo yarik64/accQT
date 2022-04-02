@@ -11,7 +11,6 @@
 #include <QString>
 
 // headers
-#include "mainwindow.h"
 #include "module.h"
 #include "cathegorie.h"
 
@@ -19,7 +18,7 @@
 class AccQT : public QApplication {
 
 	public:
-		AccQT(int &argc, char *argv[]);
+        AccQT(int argc, char *argv[]);
 		~AccQT();
 		void loadUI();
 		void loadModules();
