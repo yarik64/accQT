@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-set(PRNAME AlteratorQT)
+set(PRNAME accQT)
 
 project(${PRNAME} LANGUAGES CXX)
 

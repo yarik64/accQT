@@ -17,8 +17,10 @@
 
 class AccQT : public QApplication {
 
+	Q_OBJECT
+
 	public:
-        AccQT(int argc, char *argv[]);
+        AccQT(int argc, char **argv);
 		~AccQT();
 		void loadUI();
 		void loadModules();
