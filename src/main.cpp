@@ -1,6 +1,7 @@
 // main.cpp
 
 #include <iostream>
+#include <QDebug>
 
 
 #include "accQT.h"

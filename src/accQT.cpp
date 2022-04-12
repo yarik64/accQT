@@ -20,19 +20,20 @@
 
 
 AccQT::AccQT(int argc, char **argv): QApplication(argc, argv) {
-	this->loadUI();
+	loadModules();
+	loadCathegories();
+	loadUI();
 }
 
 
 AccQT::~AccQT() {
-	delete this;
 }
 
 
 void AccQT::loadUI() {
-	MainWindow w;
-	w.setUI(this);
-	w.show();
+	MainWindow *w = new MainWindow;
+	w->setUI(this);
+	w->show();
 }
 
 
@@ -40,7 +41,7 @@ void AccQT::loadModules() {
 	QDir dir(PATH_APPS);
 	QFileInfoList flist = dir.entryInfoList();
 
-	for (QFileInfo i : flist){
+	for (QFileInfo i : flist) {
 		Module *current_mod = new Module;
 		QString ipath = i.absoluteFilePath();
 		current_mod->load(ipath);
@@ -53,7 +54,7 @@ void AccQT::loadCathegories() {
 	QDir dir(PATH_CATH);
 	QFileInfoList flist = dir.entryInfoList();
 
-	for (QFileInfo i : flist){
+	for (QFileInfo i : flist) {
 		Cathegorie *current_cath = new Cathegorie;
 		QString ipath = i.absoluteFilePath();
 		current_cath->load(ipath);

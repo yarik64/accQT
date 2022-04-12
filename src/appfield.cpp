@@ -24,10 +24,9 @@ void AppField::loadCathegories(QList<Cathegorie> cath) {
 }
 
 void AppField::loadModules(QList<Module> module) {
-
+	
 }
 
 
 AppField::~AppField() {
-	delete this;
 }
