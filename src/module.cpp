@@ -15,3 +15,16 @@ void Module::load(QString path){
 	this->Cathegory = settings.value("Categories").toString();
 	settings.endGroup();
 }
+
+QString Module::getName() {
+	return this->Name;
+}
+
+QString Module::getIcon() {
+	return this->Icon;
+}
+
+QString Module::getCathegory() {
+	return this->Cathegory;
+}
+

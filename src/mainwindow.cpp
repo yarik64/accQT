@@ -18,11 +18,10 @@ void MainWindow::setUI(AccQT *app) {
     AppField *field =  new AppField(this);
 
     field->loadCathegories(
-            app->getCathegories()
-            );
-    field->loadModules(
+            app->getCathegories(),
             app->getModules()
             );
+
     this->setCentralWidget(field);
     this->resize(WIDTH, HEIGHT);
 

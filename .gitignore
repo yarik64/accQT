@@ -5,3 +5,4 @@ run.sh
 err.log
 CMakeLists.txt.user
 src/CMakeFiles/
+src/thrash/

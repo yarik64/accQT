@@ -16,7 +16,7 @@ class AppField : public QTreeWidget {
 	public:
 		AppField(QWidget *parent );
 		~AppField();
-		void loadCathegories(QList<Cathegorie> cath);
+		void loadCathegories(QList<Cathegorie> cath, QList<Module> modules);
 		void loadModules(QList<Module> module);
 
 	private:

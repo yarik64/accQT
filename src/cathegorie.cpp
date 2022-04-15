@@ -12,7 +12,7 @@ void Cathegorie::load(QString path){
 	settings.beginGroup("Desktop Entry");
 	this->Name = settings.value("Name").toString();
 	this->Icon = settings.value("Icon").toString();
-	this->Cathegory = settings.value("Categories").toString();
+	this->Cathegory = settings.value("X-Alterator-Category").toString();
 	settings.endGroup();
 }
 
