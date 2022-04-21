@@ -3,21 +3,24 @@
 // headers
 #include "accQT.h"
 #include "mainwindow.h"
+#include "proto.h"
 
+// Qt widgets
 #include <QMainWindow>
 
 // conrainers
 #include <QList>
 
-// libs
+// Qt classes
 #include <QDir>
 #include <QString>
 #include <QFileInfoList>
 #include <QDebug>
 
+#include <QTextStream>
+
 #define PATH_APPS "/usr/share/alterator/applications/"
 #define PATH_CATH "/usr/share/alterator/desktop-directories/"
-
 
 AccQT::AccQT(int argc, char **argv): QApplication(argc, argv) {
 	loadModules();
@@ -26,26 +29,57 @@ AccQT::AccQT(int argc, char **argv): QApplication(argc, argv) {
 }
 
 
-AccQT::~AccQT() {
-}
+AccQT::~AccQT() {}
 
 
 void AccQT::loadUI() {
+	QTextStream out(stdout);
+	QString *pth = new QString(PATH_APPS);
+	
+	QList<Proto> *trg = new QList<Proto>;
+	load(pth, trg);
+
+	// for (Proto i : *trg) { out << i.getAttr(new QString("Name")); }
+
 	MainWindow *w = new MainWindow;
 	w->setUI(this);
 	w->show();
 }
 
 
+void AccQT::load (QString *path, QList<Proto> *target) {
+	QDir dir(*path);
+	QFileInfoList flist = dir.entryInfoList();
+	QStringList *fields = new QStringList();
+	*fields << "Name" << "Icon" << "Categories";
+
+	for (QFileInfo i : flist) {
+		Proto *cur_proto = new Proto;
+		cur_proto->load(i.absoluteFilePath(), fields);
+		*target << *cur_proto;
+	}
+}
+
+
+void AccQT::loadModules() {
+	load(new QString(PATH_APPS), &modules);
+}
+
+
+void AccQT::loadCathegories() {
+	load(new QString(PATH_CATH), &cathegories);
+}
+
+
+/*
 void AccQT::loadModules() {
 	QDir dir(PATH_APPS);
 	QFileInfoList flist = dir.entryInfoList();
 
 	for (QFileInfo i : flist) {
 		Module *current_mod = new Module;
-		QString ipath = i.absoluteFilePath();
-		current_mod->load(ipath);
-		this->modules << *current_mod;
+		current_mod->load(i.absoluteFilePath());
+		modules << *current_mod;
 	}
 }
 
@@ -56,19 +90,18 @@ void AccQT::loadCathegories() {
 
 	for (QFileInfo i : flist) {
 		Cathegorie *current_cath = new Cathegorie;
-		QString ipath = i.absoluteFilePath();
-		current_cath->load(ipath);
-		this->cathegories << *current_cath;
+		current_cath->load(i.absoluteFilePath());
+		cathegories << *current_cath;
 	}
 }
+*/
 
-
-QList<Module> AccQT::getModules() {
-	return this->modules;
+QList<Proto> AccQT::getModules() {
+	return modules;
 }
 
 
-QList<Cathegorie> AccQT::getCathegories() {
-	return this->cathegories;
+QList<Proto> AccQT::getCathegories() {
+	return cathegories;
 }
 

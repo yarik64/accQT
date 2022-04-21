@@ -10,21 +10,21 @@ Module::Module(){ }
 void Module::load(QString path){
 	QSettings settings(path, QSettings::IniFormat);
 	settings.beginGroup("Desktop Entry");
-	this->Name = settings.value("Name").toString();
-	this->Icon = settings.value("Icon").toString();
-	this->Cathegory = settings.value("Categories").toString();
+	Name = settings.value("Name").toString();
+	Icon = settings.value("Icon").toString();
+	Cathegory = settings.value("Categories").toString();
 	settings.endGroup();
 }
 
 QString Module::getName() {
-	return this->Name;
+	return Name;
 }
 
 QString Module::getIcon() {
-	return this->Icon;
+	return Icon;
 }
 
 QString Module::getCathegory() {
-	return this->Cathegory;
+	return Cathegory;
 }
 

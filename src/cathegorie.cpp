@@ -10,21 +10,21 @@ Cathegorie::Cathegorie(){ }
 void Cathegorie::load(QString path){
 	QSettings settings(path, QSettings::IniFormat);
 	settings.beginGroup("Desktop Entry");
-	this->Name = settings.value("Name").toString();
-	this->Icon = settings.value("Icon").toString();
-	this->Cathegory = settings.value("X-Alterator-Category").toString();
+	Name = settings.value("Name").toString();
+	Icon = settings.value("Icon").toString();
+	Cathegory = settings.value("X-Alterator-Category").toString();
 	settings.endGroup();
 }
 
 QString Cathegorie::getName() {
-	return this->Name;
+	return Name;
 }
 
 QString Cathegorie::getIcon() {
-	return this->Icon;
+	return Icon;
 }
 
 QString Cathegorie::getCathegory() {
-	return this->Cathegory;
+	return Cathegory;
 }
 

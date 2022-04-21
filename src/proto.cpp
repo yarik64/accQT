@@ -1,30 +1,25 @@
-// cathegorie.cpp
+// proto.cpp
 
 #include <QString>
+#include <QStringList>
 #include <QSettings>
 
-#include "cathegorie.h"
+#include "proto.h"
 
-Cathegorie::Cathegorie(){ }
+Proto::Proto(){ }
 
-void Cathegorie::load(QString path){
+void Proto::load(QString path, QStringList *fields ){
 	QSettings settings(path, QSettings::IniFormat);
 	settings.beginGroup("Desktop Entry");
-	this->Name = settings.value("Name").toString();
-	this->Icon = settings.value("Icon").toString();
-	this->Cathegory = settings.value("Categories").toString();
+
+	for (QString i : *fields) {
+		Property.insert(i, settings.value(i).toString());
+	}
+
 	settings.endGroup();
 }
 
-QString Cathegorie::getName() {
-	return this->Name;
-}
-
-QString Cathegorie::getIcon() {
-	return this->Icon;
-}
-
-QString Cathegorie::getCathegory() {
-	return this->Cathegory;
+QString Proto::getAttr(QString *attr) {
+	return Property[*attr];
 }
 

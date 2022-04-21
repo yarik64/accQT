@@ -10,6 +10,9 @@ set(EXECSOURCE
 
 	module.cpp
 	module.h
+
+	proto.h
+	proto.cpp
 	)
 
 set(UISOURCE

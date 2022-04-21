@@ -10,14 +10,20 @@
 //headers
 #include "module.h"
 #include "cathegorie.h"
+#include "proto.h"
 
 class AppField : public QTreeWidget {
 
 	public:
 		AppField(QWidget *parent );
 		~AppField();
-		void loadCathegories(QList<Cathegorie> cath, QList<Module> modules);
-		void loadModules(QList<Module> module);
+
+		void loadCathegories(
+				QList<Proto> cath,
+				QList<Proto> modules
+				);
+
+		void loadModules(QList<Proto> module);
 
 	private:
 

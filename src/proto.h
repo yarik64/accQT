@@ -1,7 +1,7 @@
 // proto.h
 
-#ifndef ACCQT_CATHEGORIE_H
-#define ACCQT_CATHEGORIE_H
+#ifndef ACCQT_PROTO_H
+#define ACCQT_PROTO_H
 
 #include <QString>
 #include <QSettings>
@@ -11,16 +11,12 @@ class Proto {
 
 	public:
 		Proto();
-		void load(QString path);
-		QString getName();
-		QString getIcon();
-		QString getCathegory();
+		void load(QString path, QStringList *fields );
+		QString getAttr(QString *attr);
 
 	private:
-		QString Name;
-		QString Icon;
-		QString Cathegory;
+		QHash<QString, QString> Property;
 
 };
-#endif // ACCQT_CATHEGORIE_H
+#endif // ACCQT_PROTO_H
 

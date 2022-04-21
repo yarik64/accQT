@@ -22,7 +22,7 @@ void MainWindow::setUI(AccQT *app) {
             app->getModules()
             );
 
-    this->setCentralWidget(field);
-    this->resize(WIDTH, HEIGHT);
+    setCentralWidget(field);
+    resize(WIDTH, HEIGHT);
 
 }

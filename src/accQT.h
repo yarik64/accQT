@@ -13,6 +13,7 @@
 // headers
 #include "module.h"
 #include "cathegorie.h"
+#include "proto.h"
 
 
 class AccQT : public QApplication {
@@ -26,12 +27,13 @@ class AccQT : public QApplication {
 		void loadModules();
 		void loadCathegories();
 
-		QList<Module>     getModules();
-		QList<Cathegorie> getCathegories();
+		QList<Proto>     getModules();
+		QList<Proto> getCathegories();
 
 	private:
-		QList<Module>     modules;
-		QList<Cathegorie> cathegories;
+	void load (QString *path, QList<Proto> *target);
+		QList<Proto>     modules;
+		QList<Proto> cathegories;
 
 };
 #endif // ACCQT_ACCQT_H
