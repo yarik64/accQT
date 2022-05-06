@@ -5,12 +5,6 @@ set(EXECSOURCE
 	accQT.cpp
 	accQT.h
 
-	cathegorie.cpp
-	cathegorie.h
-
-	module.cpp
-	module.h
-
 	proto.h
 	proto.cpp
 	)

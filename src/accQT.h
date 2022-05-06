@@ -11,8 +11,6 @@
 #include <QString>
 
 // headers
-#include "module.h"
-#include "cathegorie.h"
 #include "proto.h"
 
 

@@ -8,8 +8,6 @@
 #include <QList>
 
 //headers
-#include "module.h"
-#include "cathegorie.h"
 #include "proto.h"
 
 class AppField : public QTreeWidget {
@@ -19,7 +17,7 @@ class AppField : public QTreeWidget {
 		~AppField();
 
 		void loadCathegories(
-				QList<Proto> cath,
+				QList<Proto> cathegories,
 				QList<Proto> modules
 				);
 

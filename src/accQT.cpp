@@ -33,13 +33,9 @@ AccQT::~AccQT() {}
 
 
 void AccQT::loadUI() {
-	QTextStream out(stdout);
 	QString *pth = new QString(PATH_APPS);
-	
 	QList<Proto> *trg = new QList<Proto>;
 	load(pth, trg);
-
-	// for (Proto i : *trg) { out << i.getAttr(new QString("Name")); }
 
 	MainWindow *w = new MainWindow;
 	w->setUI(this);
@@ -49,9 +45,16 @@ void AccQT::loadUI() {
 
 void AccQT::load (QString *path, QList<Proto> *target) {
 	QDir dir(*path);
+	QStringList filters = (QStringList() << "*.desktop" << "*.directory");
+	dir.setNameFilters(filters);
+
+
+	QStringList *fields = new QStringList(
+			QStringList() << "Name" << "Icon" << "Categories" << "X-Alterator-Category"
+			);
+
 	QFileInfoList flist = dir.entryInfoList();
-	QStringList *fields = new QStringList();
-	*fields << "Name" << "Icon" << "Categories";
+
 
 	for (QFileInfo i : flist) {
 		Proto *cur_proto = new Proto;
@@ -70,31 +73,6 @@ void AccQT::loadCathegories() {
 	load(new QString(PATH_CATH), &cathegories);
 }
 
-
-/*
-void AccQT::loadModules() {
-	QDir dir(PATH_APPS);
-	QFileInfoList flist = dir.entryInfoList();
-
-	for (QFileInfo i : flist) {
-		Module *current_mod = new Module;
-		current_mod->load(i.absoluteFilePath());
-		modules << *current_mod;
-	}
-}
-
-
-void AccQT::loadCathegories() {
-	QDir dir(PATH_CATH);
-	QFileInfoList flist = dir.entryInfoList();
-
-	for (QFileInfo i : flist) {
-		Cathegorie *current_cath = new Cathegorie;
-		current_cath->load(i.absoluteFilePath());
-		cathegories << *current_cath;
-	}
-}
-*/
 
 QList<Proto> AccQT::getModules() {
 	return modules;

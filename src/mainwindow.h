@@ -11,12 +11,12 @@
 
 class MainWindow : public QMainWindow {
 
-    Q_OBJECT
+	Q_OBJECT
 
 	public:
 		MainWindow();
 		~MainWindow();
-        void setUI(AccQT *app);
+		void setUI(AccQT *app);
 
 	private:
 

@@ -7,8 +7,6 @@
 
 // headers
 #include "appfield.h"
-#include "module.h"
-#include "cathegorie.h"
 #include "proto.h"
 
 AppField::AppField(QWidget *parent ) : QTreeWidget( parent ) { }
@@ -16,37 +14,25 @@ AppField::AppField(QWidget *parent ) : QTreeWidget( parent ) { }
 
 AppField::~AppField() {}
 
-void AppField::loadCathegories(QList<Proto> cath, QList<Proto> modules) {
-	QTextStream out(stdout);
-
-	for (Proto i : cath) {
-		int row = 0;
+void AppField::loadCathegories(QList<Proto> cathegories, QList<Proto> modules) {
+	for (Proto i : cathegories) {
 		QTreeWidgetItem *newItem = new QTreeWidgetItem;
-
 		for (Proto j : modules) {
-			int row2 = 0;
 			QTreeWidgetItem *newItemChild = new QTreeWidgetItem;
-					out << "i:= "<< i.getAttr(new QString("Categories"));
-					out << "j:= "<< j.getAttr(new QString("Categories"));
-					out << "\n";
-
 			int cmp = QString::compare(
-					i.getAttr(new QString("Categories")),
+					i.getAttr(new QString("X-Alterator-Category")),
 					j.getAttr(new QString("Categories")),
 					Qt::CaseInsensitive
 					);
 
 			if (cmp == 0) {
-			newItemChild->setText(row, j.getAttr(new QString("Name")));
-			newItem->insertChild(row, newItemChild);
+			newItemChild->setText(0, j.getAttr(new QString("Name")));
+			newItem->insertChild(0, newItemChild);
 			}
-			row2++;
-
 		}
 
-		newItem->setText(row, i.getAttr(new QString("Name")));
-		insertTopLevelItem(row, newItem);
-		row++;
+		newItem->setText(0, i.getAttr(new QString("Name")));
+		insertTopLevelItem(0, newItem);
 	}
 
 }
