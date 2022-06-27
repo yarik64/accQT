@@ -23,6 +23,11 @@
 #define PATH_CATH "/usr/share/alterator/desktop-directories/"
 
 AccQT::AccQT(int argc, char **argv): QApplication(argc, argv) {
+	PathToCathegories = PATH_CATH;
+	PathToModules     = PATH_APPS;
+	fields  << "Name" << "Icon" << "Categories" << "X-Alterator-Category";
+	filters << "*.desktop" << "*.directory";
+
 	loadModules();
 	loadCathegories();
 	loadUI();
@@ -33,9 +38,8 @@ AccQT::~AccQT() {}
 
 
 void AccQT::loadUI() {
-	QString *pth = new QString(PATH_APPS);
 	QList<Proto> *trg = new QList<Proto>;
-	load(pth, trg);
+	load(&PathToModules, trg);
 
 	MainWindow *w = new MainWindow;
 	w->setUI(this);
@@ -45,32 +49,23 @@ void AccQT::loadUI() {
 
 void AccQT::load (QString *path, QList<Proto> *target) {
 	QDir dir(*path);
-	QStringList filters = (QStringList() << "*.desktop" << "*.directory");
 	dir.setNameFilters(filters);
 
-
-	QStringList *fields = new QStringList(
-			QStringList() << "Name" << "Icon" << "Categories" << "X-Alterator-Category"
-			);
-
-	QFileInfoList flist = dir.entryInfoList();
-
-
-	for (QFileInfo i : flist) {
+	for (QFileInfo i : dir.entryInfoList()) {
 		Proto *cur_proto = new Proto;
-		cur_proto->load(i.absoluteFilePath(), fields);
+		cur_proto->load(i.absoluteFilePath(), &fields);
 		*target << *cur_proto;
 	}
 }
 
 
 void AccQT::loadModules() {
-	load(new QString(PATH_APPS), &modules);
+	load(&PathToModules, &modules);
 }
 
 
 void AccQT::loadCathegories() {
-	load(new QString(PATH_CATH), &cathegories);
+	load(&PathToCathegories, &cathegories);
 }
 
 

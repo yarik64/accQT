@@ -19,19 +19,27 @@ class AccQT : public QApplication {
 	Q_OBJECT
 
 	public:
-        AccQT(int argc, char **argv);
+		AccQT(int argc, char **argv);
 		~AccQT();
+
 		void loadUI();
 		void loadModules();
 		void loadCathegories();
 
-		QList<Proto>     getModules();
+		QList<Proto> getModules();
 		QList<Proto> getCathegories();
 
 	private:
 	void load (QString *path, QList<Proto> *target);
-		QList<Proto>     modules;
-		QList<Proto> cathegories;
+
+		QList<Proto>   modules;
+		QList<Proto>   cathegories;
+
+		QStringList    fields;
+		QStringList    filters;
+
+		QString        PathToCathegories;
+		QString        PathToModules;
 
 };
 #endif // ACCQT_ACCQT_H

@@ -6,3 +6,4 @@ err.log
 CMakeLists.txt.user
 src/CMakeFiles/
 src/thrash/
+git_mail_fix.sh
