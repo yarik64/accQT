@@ -24,6 +24,9 @@ class AppField : public QTreeWidget {
 		void loadModules(QList<Proto> module);
 
 	private:
+		QString CathegoryNameInCathegory;
+		QString CathegoryNameInModule;
+		QString AttrName;
 
 };
 #endif // ACCQT_APPFIELD_H
