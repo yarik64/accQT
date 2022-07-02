@@ -23,6 +23,12 @@ class AppField : public QTreeWidget {
 
 		void loadModules(QList<Proto> module);
 
+	public slots:
+		void startModule(QTreeWidgetItem *sender, int col);
+
+	signals:
+		// void itemDoubleClicked(QTreeWidgetItem *item, int column)
+
 	private:
 		QString CathegoryNameInCathegory;
 		QString CathegoryNameInModule;
