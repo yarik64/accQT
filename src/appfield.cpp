@@ -37,8 +37,12 @@ void AppField::loadCathegories(QList<Proto> cathegories, QList<Proto> modules) {
 			}
 		}
 
-		newItem->setText(0, i.getAttr(&AttrName));
-		insertTopLevelItem(0, newItem);
+		if (newItem->childCount()>0) {
+			newItem->setText(0, i.getAttr(&AttrName));
+			insertTopLevelItem(0, newItem);
+		} else {
+			delete newItem;
+		}
 	}
 
 	QObject::connect(
