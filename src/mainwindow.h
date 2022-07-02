@@ -19,6 +19,7 @@ class MainWindow : public QMainWindow {
 		void setUI(AccQT *app);
 
 	private:
+		QString MenuStyle;
 
 };
 #endif // ACCQT_MAINWINDOW_H

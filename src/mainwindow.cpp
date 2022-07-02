@@ -16,8 +16,11 @@ MainWindow::MainWindow() {}
 MainWindow::~MainWindow() {}
 
 void MainWindow::setUI(AccQT *app) {
-	AppField *field =  new AppField(this);
+	MenuStyle = "new";
+	// if (MenuStyle == "new")     { AppField *field = new AppField(this); }
+	// if (MenuStyle == "classic") { AppField *field = new AppField(this); }
 
+	AppField *field = new AppField(this); 
 	field->loadCathegories(
 			app->getCathegories(),
 			app->getModules()
