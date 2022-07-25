@@ -19,14 +19,14 @@
 
 #include <QTextStream>
 
-#define PATH_APPS "/usr/share/alterator/applications/"
-#define PATH_CATH "/usr/share/alterator/desktop-directories/"
+// #define PATH_APPS "/usr/share/alterator/applications/"
+// #define PATH_CATH "/usr/share/alterator/desktop-directories/"
 
 AccQT::AccQT(int argc, char **argv): QApplication(argc, argv) {
-	PathToCathegories = PATH_CATH;
-	PathToModules     = PATH_APPS;
-	fields  << "Name" << "Icon" << "Categories" << "X-Alterator-Category";
-	filters << "*.desktop" << "*.directory";
+	PathToCathegories	= "/usr/share/alterator/applications/";         //PATH_CATH;
+	PathToModules		= "/usr/share/alterator/desktop-directories/";  //PATH_APPS;
+	fields				<< "Name" << "Icon" << "Categories" << "X-Alterator-Category";
+	filters				<< "*.desktop" << "*.directory";
 
 	loadModules();
 	loadCathegories();
